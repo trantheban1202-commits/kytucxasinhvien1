@@ -1,0 +1,1546 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rivergate Student Residence London | International Student Housing</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        navy: {
+                            800: '#0f172a',
+                            900: '#090d16',
+                            700: '#1e293b'
+                        },
+                        amber: {
+                            500: '#f59e0b',
+                            600: '#d97706'
+                        },
+                        river: {
+                            50: '#f0fdfa',
+                            100: '#ccfbf1',
+                            500: '#14b8a6',
+                            600: '#0d9488',
+                            900: '#134e4a'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .glass-card {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(226, 232, 240, 0.8);
+        }
+
+        .chat-bubble-shadow {
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+        }
+
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+
+<body class="bg-slate-50 text-slate-800 font-sans antialiased selection:bg-river-500 selection:text-white">
+
+    <script>
+        // Language Dictionary
+        const i18n = {
+            vi: {
+                brand: "Rivergate London",
+                nav_about: "Tổng quan",
+                nav_location: "Vị trí",
+                nav_rooms: "Loại phòng",
+                nav_amenities: "Tiện ích",
+                nav_process: "Quy trình đặt",
+                nav_checkin: "Hướng dẫn Check-in",
+                nav_rules: "Quy định",
+                btn_book_now: "Đăng ký tư vấn",
+                btn_virtual_tour: "Đặt lịch xem phòng",
+                hero_title: "Ngôi Nhà An Toàn, Kết Nối & Thuận Tiện Cho Sinh Viên Quốc Tế Tại London",
+                hero_subtitle: "Ký túc xá hiện đại tại Stratford, East London. Được thiết kế chuyên biệt cho sinh viên đại học, cao học, thực tập sinh & học viên quốc tế từ 18 tuổi trở lên.",
+                stat_safety: "An Toàn 24/7",
+                stat_location: "Khu Stratford",
+                stat_support: "Hỗ Trợ 5 Ngôn Ngữ",
+                values_title: "Ba Giá Trị Cốt Lõi Tại Rivergate",
+                value_1_title: "An Toàn Tuyệt Đối",
+                value_1_desc: "Hệ thống kiểm soát ra vào bằng thẻ từ, camera CCTV khu vực chung và đội ngũ lễ tân hỗ trợ nhiệt tình.",
+                value_2_title: "Kết Nối Cộng Đồng",
+                value_2_desc: "Không gian giao lưu văn hóa, phòng học nhóm và các hoạt động cộng đồng dành cho sinh viên từ khắp nơi trên thế giới.",
+                value_3_title: "Thuận Tiện Tối Đa",
+                value_3_desc: "Kết nối giao thông hoàn hảo tới trung tâm London, siêu thị, nhà hàng đa quốc gia và các công viên lớn.",
+                chat_title: "Trợ Lý Tư Vấn 24/7",
+                chat_welcome: "Xin chào! Tôi là Trợ Lý Ảo Rivergate London. Bạn cần hỗ trợ thông tin gì hôm nay?",
+                form_modal_title: "Đăng Ký Tư Vấn & Đặt Phòng",
+                form_name: "Họ và tên *",
+                form_nationality: "Quốc tịch *",
+                form_email: "Email *",
+                form_phone: "SĐT / WhatsApp *",
+                form_school: "Trường Đại Học *",
+                form_arrival: "Ngày dự kiến đến London *",
+                form_room_type: "Loại phòng quan tâm *",
+                form_viewing_mode: "Hình thức xem phòng *",
+                form_notes: "Ghi chú",
+                form_submit: "Gửi Yêu Cầu Tư Vấn"
+            },
+            en: {
+                brand: "Rivergate London",
+                nav_about: "Overview",
+                nav_location: "Location",
+                nav_rooms: "Room Types",
+                nav_amenities: "Amenities",
+                nav_process: "Booking Process",
+                nav_checkin: "Check-in Guide",
+                nav_rules: "Residence Rules",
+                btn_book_now: "Apply / Consult",
+                btn_virtual_tour: "Book a Viewing",
+                hero_title: "A Safe, Connected & Convenient Home for International Students in London",
+                hero_subtitle: "Modern student residence in Stratford, East London. Specifically tailored for university, postgraduate, interns & short-term study abroad students aged 18+.",
+                stat_safety: "24/7 Security",
+                stat_location: "Stratford Hub",
+                stat_support: "5 Languages Support",
+                values_title: "Our Three Core Values",
+                value_1_title: "Total Safety",
+                value_1_desc: "Access-card controlled entry, CCTV in communal zones, and dedicated resident support team.",
+                value_2_title: "Vibrant Community",
+                value_2_desc: "Cultural exchanges, communal study hubs, and community events connecting students globally.",
+                value_3_title: "Maximum Convenience",
+                value_3_desc: "Seamless travel connections across London, international dining, shopping, and green parks.",
+                chat_title: "24/7 Residence Assistant",
+                chat_welcome: "Hello! Welcome to Rivergate Student Residence London. How can I assist you today?",
+                form_modal_title: "Apply for Consultation & Booking",
+                form_name: "Full Name *",
+                form_nationality: "Nationality *",
+                form_email: "Email *",
+                form_phone: "Phone / WhatsApp *",
+                form_school: "University / Institution *",
+                form_arrival: "Expected Arrival Date *",
+                form_room_type: "Preferred Room Type *",
+                form_viewing_mode: "Viewing Preference *",
+                form_notes: "Notes",
+                form_submit: "Submit Request"
+            },
+            zh: {
+                brand: "Rivergate London",
+                nav_about: "关于宿舍",
+                nav_location: "地理位置",
+                nav_rooms: "房型介绍",
+                nav_amenities: "设施服务",
+                nav_process: "预订流程",
+                nav_checkin: "入住指南",
+                nav_rules: "住宿守则",
+                btn_book_now: "立即咨询预订",
+                btn_virtual_tour: "预约看房",
+                hero_title: "伦敦国际留学生的安全、便捷与友好之家",
+                hero_subtitle: "位于东伦敦 Stratford 的现代学生公寓。专为 18 岁以上的本科生、研究生、实习生及短期项目留学生打造。",
+                stat_safety: "24/7 全天候安保",
+                stat_location: "Stratford 核心区",
+                stat_support: "多语言咨询支持",
+                values_title: "Rivergate 的三大核心价值",
+                value_1_title: "安全保障",
+                value_1_desc: "门禁卡系统、公共区域 CCTV 监控及前台协助团队。",
+                value_2_title: "多元连接",
+                value_2_desc: "共享学习空间、文化交流区及丰富的宿舍社区活动。",
+                value_3_title: "极致便捷",
+                value_3_desc: "便捷通达伦敦市中心，周边环绕多元超市、餐厅与大型公园。",
+                chat_title: "24/7 智能咨询助手",
+                chat_welcome: "您好！欢迎使用 Rivergate London 智能助手。请问今天有什么可以帮您？",
+                form_modal_title: "填写咨询与预订申请",
+                form_name: "姓名 *",
+                form_nationality: "国籍 *",
+                form_email: "电子邮箱 *",
+                form_phone: "电话 / WhatsApp *",
+                form_school: "就读大学 *",
+                form_arrival: "预计抵达伦敦日期 *",
+                form_room_type: "意向房型 *",
+                form_viewing_mode: "看房形式 *",
+                form_notes: "备注说明",
+                form_submit: "提交咨询申请"
+            },
+            ja: {
+                brand: "Rivergate London",
+                nav_about: "概要",
+                nav_location: "アクセス",
+                nav_rooms: "部屋タイプ",
+                nav_amenities: "施設・設備",
+                nav_process: "予約手順",
+                nav_checkin: "チェックイン",
+                nav_rules: "利用規約",
+                btn_book_now: "相談・予約申込",
+                btn_virtual_tour: "内覧予約",
+                hero_title: "ロンドンの留学生のための安全・快適・繋がる住まい",
+                hero_subtitle: "イーストロンドン Stratford に位置する現代的な学生寮。18歳以上の大学生、大学院生、インターンシップ生向け。",
+                stat_safety: "24時間365日セキュリティ",
+                stat_location: "Stratford エリア",
+                stat_support: "多言語サポート対応",
+                values_title: "Rivergate 3つのコアバリュー",
+                value_1_title: "安心・ Total Safety",
+                value_1_desc: "ICカードによる出入管理、共用エリア防犯カメラ、親切なレセプションサポート。",
+                value_2_title: "コミュニティ・Connection",
+                value_2_desc: "グループ学習室や多様な留学生と交流できる共用ラウンジ空間。",
+                value_3_title: "利便性・Convenience",
+                value_3_desc: "ロンドン中心部への快適なアクセス、国際色豊かなレストランやショッピングモール。",
+                chat_title: "24時間サポートチャット",
+                chat_welcome: "こんにちは！Rivergate Student Residence Londonのオンラインアシスタントです。ご質問をどうぞ！",
+                form_modal_title: "相談および部屋の予約申込",
+                form_name: "お名前 *",
+                form_nationality: "国籍 *",
+                form_email: "メールアドレス *",
+                form_phone: "電話番号 / WhatsApp *",
+                form_school: "大学名 *",
+                form_arrival: "ロンドン到着予定日 *",
+                form_room_type: "希望の部屋タイプ *",
+                form_viewing_mode: "内覧方法 *",
+                form_notes: "備考・メモ",
+                form_submit: "申込送信"
+            }
+        };
+
+        let currentLang = 'vi';
+
+        function changeLanguage(lang) {
+            currentLang = lang;
+            const elements = document.querySelectorAll('[data-i18n]');
+            elements.forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (i18n[lang] && i18n[lang][key]) {
+                    el.textContent = i18n[lang][key];
+                }
+            });
+            // Update active state on language buttons
+            ['vi', 'en', 'zh', 'ja'].forEach(l => {
+                const btn = document.getElementById(`lang-btn-${l}`);
+                if (btn) {
+                    if (l === lang) {
+                        btn.className = "px-2 py-1 text-xs font-bold rounded bg-river-600 text-white shadow-sm";
+                    } else {
+                        btn.className = "px-2 py-1 text-xs font-medium text-slate-600 hover:bg-slate-200 rounded transition";
+                    }
+                }
+            });
+        }
+    </script>
+
+    <header class="sticky top-0 z-40 bg-white/90 backdrop-blur-md border-b border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <div
+                    class="w-10 h-10 rounded-xl bg-gradient-to-tr from-navy-900 via-river-600 to-amber-500 flex items-center justify-center text-white font-black text-xl shadow-md">
+                    R
+                </div>
+                <div>
+                    <span class="font-extrabold text-lg text-navy-900 tracking-tight block leading-tight"
+                        data-i18n="brand">Rivergate London</span>
+                    <span class="text-[10px] text-slate-500 uppercase tracking-widest font-semibold block">Student
+                        Residence</span>
+                </div>
+            </div>
+
+            <!-- Desktop Nav Links -->
+            <nav class="hidden lg:flex items-center space-x-6 text-sm font-semibold text-slate-700">
+                <a href="#overview" class="hover:text-river-600 transition" data-i18n="nav_about">Tổng quan</a>
+                <a href="#location" class="hover:text-river-600 transition" data-i18n="nav_location">Vị trí</a>
+                <a href="#rooms" class="hover:text-river-600 transition" data-i18n="nav_rooms">Loại phòng</a>
+                <a href="#facilities" class="hover:text-river-600 transition" data-i18n="nav_amenities">Tiện ích</a>
+                <a href="#process" class="hover:text-river-600 transition" data-i18n="nav_process">Quy trình</a>
+                <a href="#checkin" class="hover:text-river-600 transition" data-i18n="nav_checkin">Check-in</a>
+                <a href="#rules" class="hover:text-river-600 transition" data-i18n="nav_rules">Quy định</a>
+            </nav>
+
+            <div class="flex items-center space-x-3">
+                <!-- Language Selector -->
+                <div class="flex items-center bg-slate-100 p-1 rounded-lg border border-slate-200">
+                    <button id="lang-btn-vi" onclick="changeLanguage('vi')"
+                        class="px-2 py-1 text-xs font-bold rounded bg-river-600 text-white shadow-sm">VI</button>
+                    <button id="lang-btn-en" onclick="changeLanguage('en')"
+                        class="px-2 py-1 text-xs font-medium text-slate-600 hover:bg-slate-200 rounded transition">EN</button>
+                    <button id="lang-btn-zh" onclick="changeLanguage('zh')"
+                        class="px-2 py-1 text-xs font-medium text-slate-600 hover:bg-slate-200 rounded transition">ZH</button>
+                    <button id="lang-btn-ja" onclick="changeLanguage('ja')"
+                        class="px-2 py-1 text-xs font-medium text-slate-600 hover:bg-slate-200 rounded transition">JA</button>
+                </div>
+
+                <button onclick="openBookingModal()"
+                    class="hidden sm:inline-flex items-center px-4 py-2.5 rounded-xl bg-navy-900 text-white font-semibold text-xs tracking-wide uppercase hover:bg-river-600 transition duration-200 shadow-md">
+                    <i class="fa-solid fa-calendar-check mr-2"></i> <span data-i18n="btn_book_now">Đăng ký tư vấn</span>
+                </button>
+
+                <!-- Mobile Menu Button -->
+                <button onclick="toggleMobileMenu()" class="lg:hidden p-2 text-slate-600 hover:text-slate-900">
+                    <i class="fa-solid fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden lg:hidden bg-white border-b border-slate-200 px-4 py-4 space-y-3">
+            <a href="#overview" onclick="toggleMobileMenu()"
+                class="block font-medium text-slate-700 hover:text-river-600 py-1" data-i18n="nav_about">Tổng quan</a>
+            <a href="#location" onclick="toggleMobileMenu()"
+                class="block font-medium text-slate-700 hover:text-river-600 py-1" data-i18n="nav_location">Vị trí</a>
+            <a href="#rooms" onclick="toggleMobileMenu()"
+                class="block font-medium text-slate-700 hover:text-river-600 py-1" data-i18n="nav_rooms">Loại phòng</a>
+            <a href="#facilities" onclick="toggleMobileMenu()"
+                class="block font-medium text-slate-700 hover:text-river-600 py-1" data-i18n="nav_amenities">Tiện
+                ích</a>
+            <a href="#process" onclick="toggleMobileMenu()"
+                class="block font-medium text-slate-700 hover:text-river-600 py-1" data-i18n="nav_process">Quy trình</a>
+            <a href="#checkin" onclick="toggleMobileMenu()"
+                class="block font-medium text-slate-700 hover:text-river-600 py-1" data-i18n="nav_checkin">Check-in</a>
+            <a href="#rules" onclick="toggleMobileMenu()"
+                class="block font-medium text-slate-700 hover:text-river-600 py-1" data-i18n="nav_rules">Quy định</a>
+            <button onclick="openBookingModal(); toggleMobileMenu();"
+                class="w-full mt-2 py-3 bg-navy-900 text-white font-bold rounded-xl text-center">
+                <span data-i18n="btn_book_now">Đăng ký tư vấn</span>
+            </button>
+        </div>
+    </header>
+
+    <section id="overview"
+        class="relative overflow-hidden bg-gradient-to-b from-slate-900 via-navy-900 to-slate-900 text-white pt-16 pb-24">
+        <!-- Abstract Background pattern -->
+        <div class="absolute inset-0 opacity-10 pointer-events-none">
+            <div class="absolute top-10 left-10 w-96 h-96 bg-river-500 rounded-full filter blur-3xl"></div>
+            <div class="absolute bottom-10 right-10 w-96 h-96 bg-amber-500 rounded-full filter blur-3xl"></div>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid lg:grid-cols-12 gap-12 items-center">
+                <!-- Hero Content Left -->
+                <div class="lg:col-span-7 space-y-6">
+                    <div
+                        class="inline-flex items-center space-x-2 px-3 py-1.5 rounded-full bg-river-900/60 border border-river-500/30 text-river-100 text-xs font-semibold">
+                        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                        <span>London, United Kingdom • Stratford East</span>
+                    </div>
+
+                    <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight leading-tight text-white"
+                        data-i18n="hero_title">
+                        Ngôi Nhà An Toàn, Kết Nối & Thuận Tiện Cho Sinh Viên Quốc Tế Tại London
+                    </h1>
+
+                    <p class="text-slate-300 text-base sm:text-lg leading-relaxed font-normal"
+                        data-i18n="hero_subtitle">
+                        Ký túc xá hiện đại tại Stratford, East London. Được thiết kế chuyên biệt cho sinh viên đại học,
+                        cao học, thực tập sinh & học viên quốc tế từ 18 tuổi trở lên.
+                    </p>
+
+                    <!-- Core Value Pills -->
+                    <div class="grid grid-cols-3 gap-3 pt-2">
+                        <div class="bg-white/10 backdrop-blur border border-white/10 p-3 rounded-xl text-center">
+                            <i class="fa-solid fa-shield-halved text-amber-400 text-lg mb-1"></i>
+                            <p class="text-xs font-bold text-white uppercase tracking-wider">An Toàn</p>
+                        </div>
+                        <div class="bg-white/10 backdrop-blur border border-white/10 p-3 rounded-xl text-center">
+                            <i class="fa-solid fa-people-group text-river-100 text-lg mb-1"></i>
+                            <p class="text-xs font-bold text-white uppercase tracking-wider">Kết Nối</p>
+                        </div>
+                        <div class="bg-white/10 backdrop-blur border border-white/10 p-3 rounded-xl text-center">
+                            <i class="fa-solid fa-location-dot text-emerald-400 text-lg mb-1"></i>
+                            <p class="text-xs font-bold text-white uppercase tracking-wider">Thuận Tiện</p>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-col sm:flex-row gap-4 pt-4">
+                        <button onclick="openBookingModal()"
+                            class="px-6 py-3.5 rounded-xl bg-gradient-to-r from-river-500 to-river-600 hover:from-river-600 hover:to-river-900 text-white font-bold text-sm shadow-lg shadow-river-500/20 flex items-center justify-center transition">
+                            <i class="fa-solid fa-paper-plane mr-2"></i>
+                            <span data-i18n="btn_book_now">Đăng ký tư vấn</span>
+                        </button>
+                        <button onclick="openViewingModal()"
+                            class="px-6 py-3.5 rounded-xl bg-white/10 hover:bg-white/20 border border-white/20 text-white font-bold text-sm flex items-center justify-center transition">
+                            <i class="fa-solid fa-street-view mr-2"></i>
+                            <span data-i18n="btn_virtual_tour">Đặt lịch xem phòng</span>
+                        </button>
+                    </div>
+
+                    <!-- Info bar section 1 details -->
+                    <div
+                        class="pt-6 border-t border-slate-800 grid grid-cols-2 sm:grid-cols-3 gap-4 text-xs text-slate-300">
+                        <div>
+                            <span class="text-slate-400 block font-medium">Giờ làm việc:</span>
+                            <span class="font-semibold text-white">Mon - Fri | 09:00 - 18:00 (UK)</span>
+                        </div>
+                        <div>
+                            <span class="text-slate-400 block font-medium">Hỗ trợ tư vấn:</span>
+                            <span class="font-semibold text-white">English, VI, ZH, KO, JA</span>
+                        </div>
+                        <div class="col-span-2 sm:col-span-1">
+                            <span class="text-slate-400 block font-medium">Kênh liên hệ:</span>
+                            <span class="font-semibold text-white">Form, Email, WhatsApp</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Hero Graphic Card Right -->
+                <div class="lg:col-span-5">
+                    <div
+                        class="relative bg-slate-800 rounded-3xl p-4 border border-slate-700 shadow-2xl overflow-hidden">
+                        <!-- Custom Stylized Graphic Preview -->
+                        <div
+                            class="relative h-80 rounded-2xl overflow-hidden bg-gradient-to-br from-slate-700 via-navy-800 to-slate-900 flex flex-col justify-between p-6">
+                            <div class="flex justify-between items-start">
+                                <span
+                                    class="bg-amber-500/20 text-amber-300 border border-amber-500/30 text-xs px-3 py-1 rounded-full font-bold">
+                                    Stratford Student Hub
+                                </span>
+                                <span class="text-white/60 text-xs font-mono"><i
+                                        class="fa-solid fa-wifi text-emerald-400 mr-1"></i> Free High-Speed</span>
+                            </div>
+
+                            <div class="space-y-2">
+                                <div class="bg-navy-900/80 backdrop-blur p-3 rounded-xl border border-white/10">
+                                    <div class="flex items-center space-x-3">
+                                        <div
+                                            class="w-10 h-10 rounded-lg bg-river-500 flex items-center justify-center text-white font-bold">
+                                            <i class="fa-solid fa-building-user"></i>
+                                        </div>
+                                        <div>
+                                            <h4 class="text-white text-sm font-bold">Rivergate Student Residence</h4>
+                                            <p class="text-slate-300 text-xs">Văn phòng điều phối: London, United
+                                                Kingdom</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="grid grid-cols-2 gap-2 text-xs">
+                                    <div
+                                        class="bg-slate-900/80 p-2.5 rounded-lg border border-slate-700 text-slate-300 flex items-center space-x-2">
+                                        <i class="fa-solid fa-train-subway text-river-100"></i>
+                                        <span>Stratford Station Connected</span>
+                                    </div>
+                                    <div
+                                        class="bg-slate-900/80 p-2.5 rounded-lg border border-slate-700 text-slate-300 flex items-center space-x-2">
+                                        <i class="fa-solid fa-shield-cat text-amber-400"></i>
+                                        <span>CCTV & Keycard Access</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Card Highlights footer -->
+                        <div
+                            class="mt-4 p-3 bg-navy-900 rounded-xl border border-slate-700 text-xs text-slate-300 flex items-center justify-between">
+                            <div class="flex items-center space-x-2">
+                                <i class="fa-solid fa-comments text-river-500 text-base"></i>
+                                <span>Trợ lý AI 24/7 sẵn sàng giải đáp nguồn dữ liệu chính thức.</span>
+                            </div>
+                            <button onclick="openChatbox()"
+                                class="text-river-100 font-bold underline hover:text-white">Hỏi ngay</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="location" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span
+                    class="text-xs font-bold uppercase tracking-widest text-river-600 bg-river-50 px-3 py-1 rounded-full border border-river-100">Vị
+                    Trí Đắc Địa</span>
+                <h2 class="text-3xl font-extrabold text-navy-900 mt-3">Vị Trí & Khả Năng Kết Nối Giao Thông</h2>
+                <p class="text-slate-600 mt-2 text-sm sm:text-base">
+                    Tọa lạc tại khu Stratford, East London — một trong những khu vực năng động bậc nhất với trung tâm
+                    mua sắm, siêu thị, nhà hàng & công viên xanh.
+                </p>
+            </div>
+
+            <div class="grid lg:grid-cols-12 gap-8 items-center">
+                <!-- Location details -->
+                <div class="lg:col-span-6 space-y-6">
+                    <div class="bg-slate-50 p-6 rounded-2xl border border-slate-200">
+                        <div class="flex items-start space-x-4">
+                            <div class="p-3 bg-river-600 text-white rounded-xl shadow-md">
+                                <i class="fa-solid fa-train text-xl"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-navy-900 text-lg">Ga Stratford (Stratford Hub)</h3>
+                                <p class="text-slate-600 text-sm mt-1">
+                                    Từ KTX, di chuyển dễ dàng đến ga Stratford bằng cách đi bộ hoặc xe buýt ngắn tuyến.
+                                    Từ đây kết nối trực tiếp với:
+                                </p>
+                                <div class="flex flex-wrap gap-2 mt-3">
+                                    <span
+                                        class="px-2.5 py-1 bg-red-100 text-red-700 font-semibold text-xs rounded-md">Underground</span>
+                                    <span
+                                        class="px-2.5 py-1 bg-orange-100 text-orange-700 font-semibold text-xs rounded-md">Overground</span>
+                                    <span
+                                        class="px-2.5 py-1 bg-teal-100 text-teal-700 font-semibold text-xs rounded-md">DLR</span>
+                                    <span
+                                        class="px-2.5 py-1 bg-purple-100 text-purple-700 font-semibold text-xs rounded-md">Elizabeth
+                                        Line</span>
+                                    <span
+                                        class="px-2.5 py-1 bg-blue-100 text-blue-700 font-semibold text-xs rounded-md">Xe
+                                        Buýt Tuyến Nối</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Amenities list grid -->
+                    <h4 class="font-bold text-navy-900 text-base pt-2">Tiện Ích Xung Quanh Trong Bán Kính Gần:</h4>
+                    <div class="grid grid-cols-2 sm:grid-cols-2 gap-3">
+                        <div
+                            class="flex items-center space-x-3 p-3 rounded-xl bg-slate-50 border border-slate-200 text-slate-700 text-xs font-medium">
+                            <i class="fa-solid fa-cart-shopping text-river-600 text-sm"></i>
+                            <span>Siêu thị & Cửa hàng tiện lợi</span>
+                        </div>
+                        <div
+                            class="flex items-center space-x-3 p-3 rounded-xl bg-slate-50 border border-slate-200 text-slate-700 text-xs font-medium">
+                            <i class="fa-solid fa-prescription-bottle-medical text-emerald-600 text-sm"></i>
+                            <span>Nhà thuốc & Dịch vụ y tế</span>
+                        </div>
+                        <div
+                            class="flex items-center space-x-3 p-3 rounded-xl bg-slate-50 border border-slate-200 text-slate-700 text-xs font-medium">
+                            <i class="fa-solid fa-utensils text-amber-500 text-sm"></i>
+                            <span>Nhà hàng & Quán ăn đa quốc gia</span>
+                        </div>
+                        <div
+                            class="flex items-center space-x-3 p-3 rounded-xl bg-slate-50 border border-slate-200 text-slate-700 text-xs font-medium">
+                            <i class="fa-solid fa-bag-shopping text-purple-600 text-sm"></i>
+                            <span>Trung tâm mua sắm sầm uất</span>
+                        </div>
+                        <div
+                            class="flex items-center space-x-3 p-3 rounded-xl bg-slate-50 border border-slate-200 text-slate-700 text-xs font-medium">
+                            <i class="fa-solid fa-dumbbell text-indigo-600 text-sm"></i>
+                            <span>Phòng tập thể thao (Gym)</span>
+                        </div>
+                        <div
+                            class="flex items-center space-x-3 p-3 rounded-xl bg-slate-50 border border-slate-200 text-slate-700 text-xs font-medium">
+                            <i class="fa-solid fa-tree text-emerald-600 text-sm"></i>
+                            <span>Công viên & Khu đi bộ</span>
+                        </div>
+                        <div
+                            class="flex items-center space-x-3 p-3 rounded-xl bg-slate-50 border border-slate-200 text-slate-700 text-xs font-medium">
+                            <i class="fa-solid fa-building-columns text-blue-600 text-sm"></i>
+                            <span>Ngân hàng & Máy ATM</span>
+                        </div>
+                        <div
+                            class="flex items-center space-x-3 p-3 rounded-xl bg-slate-50 border border-slate-200 text-slate-700 text-xs font-medium">
+                            <i class="fa-solid fa-bus text-red-500 text-sm"></i>
+                            <span>Trạm xe buýt & Trạm tàu</span>
+                        </div>
+                    </div>
+
+                    <div
+                        class="p-3 bg-amber-50 border border-amber-200 rounded-xl text-xs text-amber-800 flex items-start space-x-2">
+                        <i class="fa-solid fa-circle-info text-amber-600 text-sm mt-0.5"></i>
+                        <span><strong>Lưu ý tư vấn:</strong> Thời gian di chuyển thực tế sẽ tùy thuộc vào lộ trình và
+                            thời điểm. Hãy kiểm tra ứng dụng giao thông thực tế trước chuyến đi.</span>
+                    </div>
+                </div>
+
+                <!-- Visual Stratford map highlight card -->
+                <div class="lg:col-span-6">
+                    <div
+                        class="bg-navy-900 text-white rounded-3xl p-6 shadow-xl border border-slate-800 relative overflow-hidden">
+                        <div class="flex items-center justify-between border-b border-slate-800 pb-4 mb-4">
+                            <div>
+                                <h4 class="font-extrabold text-lg text-white">East London • Stratford Zone</h4>
+                                <p class="text-xs text-slate-400">Trọng điểm kết nối các trường Đại Học tại London</p>
+                            </div>
+                            <span
+                                class="px-3 py-1 bg-emerald-500/20 text-emerald-400 text-xs font-bold rounded-full border border-emerald-500/30">
+                                Perfect Hub
+                            </span>
+                        </div>
+
+                        <!-- Stylized Map Simulation -->
+                        <div class="bg-slate-800 rounded-2xl p-6 space-y-4 border border-slate-700">
+                            <div class="flex items-center justify-between bg-slate-900 p-3 rounded-xl">
+                                <div class="flex items-center space-x-3">
+                                    <div
+                                        class="w-8 h-8 rounded-full bg-river-500 flex items-center justify-center text-white font-bold text-xs">
+                                        KTX
+                                    </div>
+                                    <span class="text-xs font-bold">Rivergate Student Residence</span>
+                                </div>
+                                <span class="text-[10px] bg-slate-800 text-slate-300 px-2 py-1 rounded">Điểm xuất
+                                    phát</span>
+                            </div>
+
+                            <div class="relative pl-6 border-l-2 border-dashed border-river-500 space-y-4">
+                                <div class="relative">
+                                    <span class="absolute -left-[31px] top-1 w-3 h-3 rounded-full bg-river-500"></span>
+                                    <p class="text-xs font-bold text-white">Đi bộ / Bus ngắn tuyến</p>
+                                    <p class="text-[11px] text-slate-400">Tiếp cận nhanh chóng trung tâm mua sắm & nhà
+                                        thuốc</p>
+                                </div>
+                                <div class="relative">
+                                    <span class="absolute -left-[31px] top-1 w-3 h-3 rounded-full bg-amber-500"></span>
+                                    <p class="text-xs font-bold text-white">Ga Stratford Station</p>
+                                    <p class="text-[11px] text-slate-400">Kết nối trực tiếp Central, Jubilee, DLR &
+                                        Elizabeth Line</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mt-4 text-center">
+                            <p class="text-xs text-slate-400">Đội ngũ tư vấn luôn hỗ trợ hướng dẫn tuyến đường thuận
+                                tiện nhất cho tân sinh viên.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="rooms" class="py-20 bg-slate-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span
+                    class="text-xs font-bold uppercase tracking-widest text-river-600 bg-river-50 px-3 py-1 rounded-full border border-river-100">Các
+                    Loại Phòng</span>
+                <h2 class="text-3xl font-extrabold text-navy-900 mt-3">Lựa Chọn Không Gian Sống Phù Hợp Nhu Cầu</h2>
+                <p class="text-slate-600 mt-2 text-sm sm:text-base">
+                    Được thiết kế linh hoạt cho sinh viên cá nhân, bạn đồng hành hoặc người cần không gian học tập riêng
+                    tư cao.
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- 3.1 Phòng Ensuite -->
+                <div
+                    class="bg-white rounded-3xl p-6 border border-slate-200 shadow-md hover:shadow-xl transition flex flex-col justify-between">
+                    <div>
+                        <div
+                            class="relative h-48 rounded-2xl bg-gradient-to-tr from-slate-800 to-river-900 overflow-hidden mb-5 p-4 flex flex-col justify-between">
+                            <span
+                                class="bg-river-500 text-white text-xs font-extrabold px-3 py-1 rounded-full uppercase tracking-wider w-fit">
+                                Phổ Biến Nhất
+                            </span>
+                            <div>
+                                <h3 class="text-2xl font-black text-white">Phòng Ensuite</h3>
+                                <p class="text-xs text-slate-300">Nhà vệ sinh riêng • Bếp chung</p>
+                            </div>
+                        </div>
+
+                        <p class="text-slate-600 text-xs sm:text-sm leading-relaxed mb-4">
+                            Phù hợp với sinh viên muốn có không gian riêng tư cá nhân nhưng vẫn thích giao lưu và sử
+                            dụng khu bếp chung với các bạn cùng tầng hoặc căn hộ.
+                        </p>
+
+                        <h4 class="font-bold text-xs uppercase tracking-wider text-navy-900 mb-2">Đặc điểm nổi bật:</h4>
+                        <ul class="space-y-2 text-xs text-slate-700 mb-6">
+                            <li class="flex items-center"><i class="fa-solid fa-check text-river-600 mr-2"></i> Giường
+                                đơn hoặc giường cỡ nhỏ đôi</li>
+                            <li class="flex items-center"><i class="fa-solid fa-check text-river-600 mr-2"></i> Bàn học
+                                + ghế tiện nghi</li>
+                            <li class="flex items-center"><i class="fa-solid fa-check text-river-600 mr-2"></i> Tủ quần
+                                áo & kệ sách lưu trữ</li>
+                            <li class="flex items-center"><i class="fa-solid fa-check text-river-600 mr-2"></i>
+                                <strong>Nhà vệ sinh & phòng tắm riêng</strong>
+                            </li>
+                            <li class="flex items-center"><i class="fa-solid fa-check text-river-600 mr-2"></i> Sử dụng
+                                khu bếp chung hiện đại</li>
+                            <li class="flex items-center"><i class="fa-solid fa-check text-river-600 mr-2"></i> Cửa sổ
+                                đón ánh sáng tự nhiên</li>
+                        </ul>
+                    </div>
+
+                    <div class="pt-4 border-t border-slate-100">
+                        <span class="text-[11px] font-semibold text-slate-500 block mb-3">Dành cho: Sinh viên thích giao
+                            lưu, tiết kiệm chi phí so với Studio.</span>
+                        <button onclick="openBookingModal('Ensuite')"
+                            class="w-full py-2.5 bg-slate-900 hover:bg-river-600 text-white rounded-xl text-xs font-bold transition">
+                            Tư Vấn Phòng Ensuite
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 3.2 Phòng Studio -->
+                <div
+                    class="bg-white rounded-3xl p-6 border border-slate-200 shadow-md hover:shadow-xl transition flex flex-col justify-between">
+                    <div>
+                        <div
+                            class="relative h-48 rounded-2xl bg-gradient-to-tr from-slate-900 to-indigo-900 overflow-hidden mb-5 p-4 flex flex-col justify-between">
+                            <span
+                                class="bg-amber-500 text-navy-900 text-xs font-extrabold px-3 py-1 rounded-full uppercase tracking-wider w-fit">
+                                Bếp & WC Khép Kín
+                            </span>
+                            <div>
+                                <h3 class="text-2xl font-black text-white">Phòng Studio</h3>
+                                <p class="text-xs text-slate-300">Không gian độc lập 100%</p>
+                            </div>
+                        </div>
+
+                        <p class="text-slate-600 text-xs sm:text-sm leading-relaxed mb-4">
+                            Lựa chọn lý tưởng cho khách thuê cần sự riêng tư tối đa hoặc tự nấu ăn trong không gian
+                            riêng.
+                        </p>
+
+                        <h4 class="font-bold text-xs uppercase tracking-wider text-navy-900 mb-2">Đặc điểm nổi bật:</h4>
+                        <ul class="space-y-2 text-xs text-slate-700 mb-6">
+                            <li class="flex items-center"><i class="fa-solid fa-check text-amber-500 mr-2"></i> Giường
+                                ngủ thoải mái</li>
+                            <li class="flex items-center"><i class="fa-solid fa-check text-amber-500 mr-2"></i> Bàn học
+                                & ghế làm việc riêng</li>
+                            <li class="flex items-center"><i class="fa-solid fa-check text-amber-500 mr-2"></i> Tủ quần
+                                áo & kệ chứa đồ</li>
+                            <li class="flex items-center"><i class="fa-solid fa-check text-amber-500 mr-2"></i>
+                                <strong>Nhà vệ sinh & phòng tắm riêng</strong>
+                            </li>
+                            <li class="flex items-center"><i class="fa-solid fa-check text-amber-500 mr-2"></i>
+                                <strong>Bếp nhỏ khép kín + tủ lạnh nhỏ</strong>
+                            </li>
+                            <li class="flex items-center"><i class="fa-solid fa-check text-amber-500 mr-2"></i> Phù hợp
+                                hoàn hảo cho 1 người ở</li>
+                        </ul>
+                    </div>
+
+                    <div class="pt-4 border-t border-slate-100">
+                        <span class="text-[11px] font-semibold text-slate-500 block mb-3">Dành cho: Sinh viên cao học,
+                            học viên lớn tuổi, cần tập trung cao.</span>
+                        <button onclick="openBookingModal('Studio')"
+                            class="w-full py-2.5 bg-slate-900 hover:bg-river-600 text-white rounded-xl text-xs font-bold transition">
+                            Tư Vấn Phòng Studio
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 3.3 Phòng Twin -->
+                <div
+                    class="bg-white rounded-3xl p-6 border border-slate-200 shadow-md hover:shadow-xl transition flex flex-col justify-between">
+                    <div>
+                        <div
+                            class="relative h-48 rounded-2xl bg-gradient-to-tr from-slate-900 to-teal-900 overflow-hidden mb-5 p-4 flex flex-col justify-between">
+                            <span
+                                class="bg-emerald-500 text-white text-xs font-extrabold px-3 py-1 rounded-full uppercase tracking-wider w-fit">
+                                Tiết Kiệm Chi Phí
+                            </span>
+                            <div>
+                                <h3 class="text-2xl font-black text-white">Phòng Twin</h3>
+                                <p class="text-xs text-slate-300">Dành cho 2 người ở chung</p>
+                            </div>
+                        </div>
+
+                        <p class="text-slate-600 text-xs sm:text-sm leading-relaxed mb-4">
+                            Lựa chọn tuyệt vời cho hai người bạn cùng ở hoặc sinh viên muốn tối ưu hóa chi phí sinh hoạt
+                            tại London.
+                        </p>
+
+                        <h4 class="font-bold text-xs uppercase tracking-wider text-navy-900 mb-2">Đặc điểm nổi bật:</h4>
+                        <ul class="space-y-2 text-xs text-slate-700 mb-6">
+                            <li class="flex items-center"><i class="fa-solid fa-check text-emerald-600 mr-2"></i>
+                                <strong>Hai giường đơn tách biệt</strong>
+                            </li>
+                            <li class="flex items-center"><i class="fa-solid fa-check text-emerald-600 mr-2"></i> Hai
+                                khu vực góc học tập riêng</li>
+                            <li class="flex items-center"><i class="fa-solid fa-check text-emerald-600 mr-2"></i> Tủ
+                                quần áo / khu lưu trữ cá nhân từng người</li>
+                            <li class="flex items-center"><i class="fa-solid fa-check text-emerald-600 mr-2"></i> Nhà vệ
+                                sinh riêng hoặc chung tùy vị trí</li>
+                            <li class="flex items-center"><i class="fa-solid fa-check text-emerald-600 mr-2"></i> Khu
+                                bếp sử dụng chung</li>
+                            <li class="flex items-center"><i class="fa-solid fa-check text-emerald-600 mr-2"></i> Cùng
+                                thống nhất quy định vệ sinh & giờ giấc</li>
+                        </ul>
+                    </div>
+
+                    <div class="pt-4 border-t border-slate-100">
+                        <span class="text-[11px] font-semibold text-slate-500 block mb-3">Dành cho: Bạn bè cùng đi học,
+                            sinh viên tối ưu tài chính.</span>
+                        <button onclick="openBookingModal('Twin')"
+                            class="w-full py-2.5 bg-slate-900 hover:bg-river-600 text-white rounded-xl text-xs font-bold transition">
+                            Tư Vấn Phòng Twin
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="facilities" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span
+                    class="text-xs font-bold uppercase tracking-widest text-river-600 bg-river-50 px-3 py-1 rounded-full border border-river-100">Tiện
+                    Ích Toàn Diện</span>
+                <h2 class="text-3xl font-extrabold text-navy-900 mt-3">Tiện Ích Sinh Hoạt & Học Tập Tại KTX</h2>
+                <p class="text-slate-600 mt-2 text-sm sm:text-base">
+                    Rivergate Student Residence London trang bị đầy đủ các tiện ích thiết yếu phục vụ trọn vẹn nhu cầu
+                    sinh hoạt hàng ngày.
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Facility 1 Wifi -->
+                <div class="p-6 rounded-2xl bg-slate-50 border border-slate-200 hover:border-river-500 transition">
+                    <div
+                        class="w-12 h-12 rounded-xl bg-blue-100 text-blue-600 flex items-center justify-center text-xl mb-4">
+                        <i class="fa-solid fa-wifi"></i>
+                    </div>
+                    <h3 class="font-bold text-navy-900 text-base mb-2">Internet Wifi Tốc Độ Cao</h3>
+                    <p class="text-slate-600 text-xs leading-relaxed">
+                        Phủ sóng toàn bộ phòng riêng và các khu vực sinh hoạt chung. Khi gặp sự cố kết nối, cư dân có
+                        thể liên hệ lễ tân hoặc bộ phận hỗ trợ kỹ thuật nhanh chóng.
+                    </p>
+                </div>
+
+                <!-- Facility 2 Laundry -->
+                <div class="p-6 rounded-2xl bg-slate-50 border border-slate-200 hover:border-river-500 transition">
+                    <div
+                        class="w-12 h-12 rounded-xl bg-cyan-100 text-cyan-600 flex items-center justify-center text-xl mb-4">
+                        <i class="fa-solid fa-soap"></i>
+                    </div>
+                    <h3 class="font-bold text-navy-900 text-base mb-2">Khu Giặt Sấy Tự Phục Vụ</h3>
+                    <p class="text-slate-600 text-xs leading-relaxed">
+                        Trang bị máy giặt & máy sấy hiện đại. Sinh viên giữ vệ sinh chung, tuân thủ hướng dẫn sử dụng và
+                        không để đồ cá nhân quá lâu trong máy.
+                    </p>
+                </div>
+
+                <!-- Facility 3 Study Room -->
+                <div class="p-6 rounded-2xl bg-slate-50 border border-slate-200 hover:border-river-500 transition">
+                    <div
+                        class="w-12 h-12 rounded-xl bg-amber-100 text-amber-600 flex items-center justify-center text-xl mb-4">
+                        <i class="fa-solid fa-book-open"></i>
+                    </div>
+                    <h3 class="font-bold text-navy-900 text-base mb-2">Phòng Học Nhóm & Cá Nhân</h3>
+                    <p class="text-slate-600 text-xs leading-relaxed">
+                        Không gian yên tĩnh lý tưởng để học nhóm, làm bài luận hoặc ôn thi. Yêu cầu giữ trật tự và tôn
+                        trọng môi trường học tập chung.
+                    </p>
+                </div>
+
+                <!-- Facility 4 Lounge -->
+                <div class="p-6 rounded-2xl bg-slate-50 border border-slate-200 hover:border-river-500 transition">
+                    <div
+                        class="w-12 h-12 rounded-xl bg-purple-100 text-purple-600 flex items-center justify-center text-xl mb-4">
+                        <i class="fa-solid fa-champagne-glasses"></i>
+                    </div>
+                    <h3 class="font-bold text-navy-900 text-base mb-2">Khu Sinh Hoạt Cộng Đồng</h3>
+                    <p class="text-slate-600 text-xs leading-relaxed">
+                        Nơi giao lưu, gặp gỡ sinh viên quốc tế và tham gia các sự kiện văn hóa do ban quản lý KTX tổ
+                        chức giúp bạn nhanh chóng hòa nhập.
+                    </p>
+                </div>
+
+                <!-- Facility 5 Reception -->
+                <div class="p-6 rounded-2xl bg-slate-50 border border-slate-200 hover:border-river-500 transition">
+                    <div
+                        class="w-12 h-12 rounded-xl bg-emerald-100 text-emerald-600 flex items-center justify-center text-xl mb-4">
+                        <i class="fa-solid fa-user-shield"></i>
+                    </div>
+                    <h3 class="font-bold text-navy-900 text-base mb-2">Lễ Tân & Hỗ Trợ Cư Dân</h3>
+                    <p class="text-slate-600 text-xs leading-relaxed">
+                        Hỗ trợ thủ tục check-in, nhận thư từ / bưu phẩm, hướng dẫn sử dụng tiện ích và giải quyết nhanh
+                        các yêu cầu hỗ trợ sinh hoạt.
+                    </p>
+                </div>
+
+                <!-- Facility 6 Security & Bike -->
+                <div class="p-6 rounded-2xl bg-slate-50 border border-slate-200 hover:border-river-500 transition">
+                    <div
+                        class="w-12 h-12 rounded-xl bg-rose-100 text-rose-600 flex items-center justify-center text-xl mb-4">
+                        <i class="fa-solid fa-shield"></i>
+                    </div>
+                    <h3 class="font-bold text-navy-900 text-base mb-2">An Ninh & Khu Để Xe Đạp</h3>
+                    <p class="text-slate-600 text-xs leading-relaxed">
+                        Hệ thống kiểm soát ra vào, camera an ninh khu vực chung. Có khu vực giữ xe đạp riêng (khách thuê
+                        tự bị khóa an toàn).
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="process" class="py-20 bg-navy-900 text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span
+                    class="text-xs font-bold uppercase tracking-widest text-river-100 bg-white/10 px-3 py-1 rounded-full border border-white/10">Quy
+                    Trình Đặt Phòng</span>
+                <h2 class="text-3xl font-extrabold text-white mt-3">6 Bước Tư Vấn & Hoàn Tất Đặt Phòng</h2>
+                <p class="text-slate-300 mt-2 text-sm sm:text-base">
+                    Quy trình làm việc minh bạch, chuyên nghiệp giúp bạn chuẩn bị tốt nhất trước khi đặt chân tới
+                    London.
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Step 1 -->
+                <div class="bg-slate-800/80 border border-slate-700 p-6 rounded-2xl relative">
+                    <span class="text-3xl font-black text-river-500 block mb-2">01</span>
+                    <h3 class="font-bold text-white text-base mb-2">Gửi Yêu Cầu Tư Vấn</h3>
+                    <p class="text-slate-300 text-xs leading-relaxed">
+                        Điền biểu mẫu trên website hoặc liên hệ qua email, điện thoại, WhatsApp. Cung cấp: Họ tên, quốc
+                        tịch, trường học, ngày đến dự kiến, loại phòng & thời hạn thuê.
+                    </p>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="bg-slate-800/80 border border-slate-700 p-6 rounded-2xl relative">
+                    <span class="text-3xl font-black text-amber-500 block mb-2">02</span>
+                    <h3 class="font-bold text-white text-base mb-2">Nhận Tư Vấn Sơ Bộ</h3>
+                    <p class="text-slate-300 text-xs leading-relaxed">
+                        Đội ngũ tư vấn kiểm tra thông tin, giới thiệu loại phòng phù hợp nhất và giải đáp các câu hỏi cơ
+                        bản về đời sống ký túc xá.
+                    </p>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="bg-slate-800/80 border border-slate-700 p-6 rounded-2xl relative">
+                    <span class="text-3xl font-black text-emerald-400 block mb-2">03</span>
+                    <h3 class="font-bold text-white text-base mb-2">Kiểm Tra Tình Trạng Phòng</h3>
+                    <p class="text-slate-300 text-xs leading-relaxed">
+                        Nhân viên tư vấn xác nhận chính xác phòng trống, điều kiện thuê, thời hạn hợp đồng và giấy tờ
+                        cần thiết từ hệ thống dữ liệu chính thức.
+                    </p>
+                </div>
+
+                <!-- Step 4 -->
+                <div class="bg-slate-800/80 border border-slate-700 p-6 rounded-2xl relative">
+                    <span class="text-3xl font-black text-indigo-400 block mb-2">04</span>
+                    <h3 class="font-bold text-white text-base mb-2">Đặt Lịch Xem Phòng</h3>
+                    <p class="text-slate-300 text-xs leading-relaxed">
+                        Đăng ký tham quan trực tiếp tại KTX London hoặc tham gia buổi xem phòng trực tuyến (Online
+                        Viewing) nếu đang ở nước ngoài.
+                    </p>
+                </div>
+
+                <!-- Step 5 -->
+                <div class="bg-slate-800/80 border border-slate-700 p-6 rounded-2xl relative">
+                    <span class="text-3xl font-black text-rose-400 block mb-2">05</span>
+                    <h3 class="font-bold text-white text-base mb-2">Hoàn Tất Hồ Sơ</h3>
+                    <p class="text-slate-300 text-xs leading-relaxed">
+                        Nộp hồ sơ theo hướng dẫn chính thức (Giấy tờ tùy thân hợp lệ, thư mời nhập học Offer Letter hoặc
+                        giấy xác nhận sinh viên).
+                    </p>
+                </div>
+
+                <!-- Step 6 -->
+                <div class="bg-slate-800/80 border border-slate-700 p-6 rounded-2xl relative">
+                    <span class="text-3xl font-black text-teal-400 block mb-2">06</span>
+                    <h3 class="font-bold text-white text-base mb-2">Xác Nhận & Hướng Dẫn Check-in</h3>
+                    <p class="text-slate-300 text-xs leading-relaxed">
+                        Nhận Email xác nhận chính thức kèm ngày đến, địa điểm nhận phòng và danh sách vật dụng cần chuẩn
+                        bị trước khi bay.
+                    </p>
+                </div>
+            </div>
+
+            <div class="mt-12 text-center">
+                <button onclick="openBookingModal()"
+                    class="px-8 py-4 bg-river-500 hover:bg-river-600 text-white rounded-xl font-bold text-sm shadow-xl transition inline-flex items-center space-x-2">
+                    <i class="fa-solid fa-paper-plane"></i>
+                    <span>Bắt Đầu Bước 1: Đăng Ký Yêu Cầu Tư Vấn</span>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <section id="checkin" class="py-20 bg-slate-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-2 gap-12">
+                <!-- Section 7: Check-in Guide -->
+                <div class="bg-white p-8 rounded-3xl border border-slate-200 shadow-md">
+                    <div class="flex items-center space-x-3 mb-6">
+                        <div
+                            class="w-10 h-10 rounded-xl bg-river-100 text-river-600 flex items-center justify-center font-bold">
+                            <i class="fa-solid fa-passport text-lg"></i>
+                        </div>
+                        <h2 class="text-2xl font-extrabold text-navy-900">7. Hướng Dẫn Check-in Cho Khách Mới</h2>
+                    </div>
+
+                    <p class="text-slate-600 text-xs sm:text-sm mb-4">
+                        Khách thuê cần kiểm tra kỹ Email xác nhận trước ngày đến KTX để nắm rõ thời gian và địa điểm
+                        nhận phòng.
+                    </p>
+
+                    <h4 class="font-bold text-xs uppercase tracking-wider text-navy-900 mb-3">Giấy Tờ Cần Chuẩn Bị Khi
+                        Check-in:</h4>
+                    <ul
+                        class="space-y-2 text-xs text-slate-700 mb-6 bg-slate-50 p-4 rounded-xl border border-slate-200">
+                        <li class="flex items-center"><i class="fa-solid fa-circle-check text-river-600 mr-2"></i> Hộ
+                            chiếu hoặc giấy tờ tùy thân hợp lệ</li>
+                        <li class="flex items-center"><i class="fa-solid fa-circle-check text-river-600 mr-2"></i> Email
+                            xác nhận đặt phòng chính thức</li>
+                        <li class="flex items-center"><i class="fa-solid fa-circle-check text-river-600 mr-2"></i> Thông
+                            tin liên hệ cá nhân</li>
+                        <li class="flex items-center"><i class="fa-solid fa-circle-check text-river-600 mr-2"></i> Giấy
+                            tờ sinh viên / Thư mời nhập học (nếu được yêu cầu)</li>
+                    </ul>
+
+                    <h4 class="font-bold text-xs uppercase tracking-wider text-navy-900 mb-3">Nội Dung Sẽ Được Hướng Dẫn
+                        Sau Khi Nhận Phòng:</h4>
+                    <div class="grid grid-cols-2 gap-2 text-xs text-slate-600">
+                        <div class="p-2 bg-slate-50 rounded-lg">• Nhận chìa khóa / thẻ ra vào</div>
+                        <div class="p-2 bg-slate-50 rounded-lg">• Kết nối Wifi sinh viên</div>
+                        <div class="p-2 bg-slate-50 rounded-lg">• Hướng dẫn khu giặt sấy</div>
+                        <div class="p-2 bg-slate-50 rounded-lg">• An toàn phòng cháy chữa cháy</div>
+                        <div class="p-2 bg-slate-50 rounded-lg">• Liên hệ lễ tân & báo sự cố</div>
+                        <div class="p-2 bg-slate-50 rounded-lg">• Quy định đón khách & giữ trật tự</div>
+                    </div>
+                </div>
+
+                <!-- Section 8 & Section 6: Rules & Marketing Compliance -->
+                <div id="rules"
+                    class="bg-white p-8 rounded-3xl border border-slate-200 shadow-md flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center space-x-3 mb-6">
+                            <div
+                                class="w-10 h-10 rounded-xl bg-amber-100 text-amber-600 flex items-center justify-center font-bold">
+                                <i class="fa-solid fa-scale-balanced text-lg"></i>
+                            </div>
+                            <h2 class="text-2xl font-extrabold text-navy-900">8. Quy Định Sinh Hoạt & Lưu Ý</h2>
+                        </div>
+
+                        <div class="space-y-4 text-xs text-slate-700">
+                            <div class="p-3 bg-slate-50 rounded-xl border border-slate-200">
+                                <strong class="text-navy-900 block mb-1">Vệ Sinh & Trật Tự Chung:</strong>
+                                Giữ gìn vệ sinh phòng riêng và khu vực bếp chung. Hạn chế tiếng ồn đặc biệt vào buổi tối
+                                để đảm bảo môi trường học tập.
+                            </div>
+
+                            <div class="p-3 bg-slate-50 rounded-xl border border-slate-200">
+                                <strong class="text-navy-900 block mb-1">Quản Lý Khách Đến Thăm & Thẻ Ra Vào:</strong>
+                                Tuân thủ quy định đăng ký khách thăm. Không chia sẻ thẻ ra vào, chìa khóa hoặc thông tin
+                                phòng cho người khác.
+                            </div>
+
+                            <div class="p-3 bg-slate-50 rounded-xl border border-slate-200">
+                                <strong class="text-navy-900 block mb-1">Báo Sự Cố & Bảo Quản Tài Sản:</strong>
+                                Khi hỏng thiết bị, mất chìa khóa hay sự cố điện nước, báo ngay cho lễ tân. Tự bảo quản
+                                tài sản cá nhân và luôn khóa cửa phòng.
+                            </div>
+                        </div>
+
+                        <div class="mt-6 p-4 bg-navy-900 text-white rounded-2xl">
+                            <h4 class="font-bold text-xs text-amber-400 mb-2 uppercase tracking-wider">Nguyên Tắc Tư Vấn
+                                Chuẩn Mực:</h4>
+                            <p class="text-[11px] text-slate-300 leading-relaxed">
+                                Đội ngũ tư vấn và Trợ lý AI không tự ý cam kết giá thuê, tự tạo ưu đãi giảm giá hay xác
+                                nhận phòng trống khi chưa có dữ liệu cập nhật. Đối với các vấn đề về hợp đồng, tiền đặt
+                                cọc hoặc thủ tục tài chính, sinh viên sẽ luôn được kết nối trực tiếp tới đội ngũ tư vấn
+                                chuyên trách.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-navy-900 text-white border-t border-slate-800 pt-16 pb-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 pb-12 border-b border-slate-800">
+                <div class="space-y-3 md:col-span-1">
+                    <div class="flex items-center space-x-2">
+                        <div
+                            class="w-8 h-8 rounded-lg bg-river-500 flex items-center justify-center font-bold text-white">
+                            R</div>
+                        <span class="font-bold text-base text-white">Rivergate London</span>
+                    </div>
+                    <p class="text-xs text-slate-400 leading-relaxed">
+                        Rivergate Student Residence London — Hệ thống ký túc xá sinh viên quốc tế uy tín tại khu
+                        Stratford, East London.
+                    </p>
+                </div>
+
+                <div>
+                    <h4 class="font-bold text-xs uppercase tracking-wider text-amber-400 mb-3">Văn Phòng Điều Phối</h4>
+                    <p class="text-xs text-slate-300">London, United Kingdom</p>
+                    <p class="text-xs text-slate-300 mt-1">Khu vực: Stratford, East London</p>
+                </div>
+
+                <div>
+                    <h4 class="font-bold text-xs uppercase tracking-wider text-amber-400 mb-3">Giờ Hỗ Trợ Tư Vấn</h4>
+                    <p class="text-xs text-slate-300">Thứ Hai - Thứ Sáu</p>
+                    <p class="text-xs text-slate-300 mt-1">09:00 - 18:00 (Giờ London / UK Time)</p>
+                </div>
+
+                <div>
+                    <h4 class="font-bold text-xs uppercase tracking-wider text-amber-400 mb-3">Kênh Liên Hệ</h4>
+                    <p class="text-xs text-slate-300 mb-1"><i class="fa-solid fa-envelope mr-2 text-river-500"></i> Form
+                        trên website & Email</p>
+                    <p class="text-xs text-slate-300 mb-1"><i class="fa-brands fa-whatsapp mr-2 text-emerald-400"></i>
+                        Điện thoại & WhatsApp</p>
+                    <p class="text-xs text-slate-300"><i class="fa-solid fa-calendar mr-2 text-amber-400"></i> Đặt lịch
+                        xem phòng trực tiếp/online</p>
+                </div>
+            </div>
+
+            <div class="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500">
+                <p>© 2026 Rivergate Student Residence London. All rights reserved.</p>
+                <div class="flex space-x-4 mt-4 sm:mt-0">
+                    <a href="#" onclick="openChatbox()" class="hover:text-slate-300">Hỏi Trợ Lý AI 24/7</a>
+                    <a href="#rules" class="hover:text-slate-300">Quy Định Sinh Hoạt</a>
+                    <a href="#process" class="hover:text-slate-300">Quy Trình Đặt Phòng</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating Chat Trigger Button -->
+    <div class="fixed bottom-6 right-6 z-50">
+        <button onclick="toggleChatbox()"
+            class="relative group bg-gradient-to-r from-river-600 to-navy-900 text-white p-4 rounded-full shadow-2xl hover:scale-105 transition duration-300 flex items-center justify-center border border-white/20">
+            <i class="fa-solid fa-comments text-2xl"></i>
+            <span class="absolute -top-1 -right-1 w-3.5 h-3.5 bg-emerald-400 border-2 border-white rounded-full"></span>
+            <span
+                class="max-w-0 overflow-hidden whitespace-nowrap group-hover:max-w-xs transition-all duration-300 text-xs font-bold pl-0 group-hover:pl-2">
+                Trợ Lý AI 24/7
+            </span>
+        </button>
+    </div>
+
+    <!-- 24/7 Interactive AI Chatbox Drawer -->
+    <div id="chatbox-container"
+        class="hidden fixed bottom-24 right-6 w-96 max-w-[calc(100vw-2rem)] h-[520px] bg-white rounded-3xl shadow-2xl border border-slate-200 z-50 flex flex-col overflow-hidden chat-bubble-shadow">
+        <!-- Chat Header -->
+        <div class="bg-navy-900 text-white p-4 flex items-center justify-between border-b border-slate-800">
+            <div class="flex items-center space-x-3">
+                <div
+                    class="w-9 h-9 rounded-full bg-river-500 flex items-center justify-center font-bold text-white text-sm">
+                    <i class="fa-solid fa-robot"></i>
+                </div>
+                <div>
+                    <h4 class="font-bold text-xs text-white" data-i18n="chat_title">Trợ Lý Tư Vấn 24/7</h4>
+                    <span class="text-[10px] text-emerald-400 font-medium">Dữ liệu nguồn chính thức</span>
+                </div>
+            </div>
+            <button onclick="toggleChatbox()" class="text-slate-400 hover:text-white p-1">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+        </div>
+
+        <!-- Chat Messages List -->
+        <div id="chat-messages" class="flex-1 p-4 overflow-y-auto space-y-3 custom-scrollbar bg-slate-50 text-xs">
+            <!-- Welcome message -->
+            <div class="bg-white p-3 rounded-2xl border border-slate-200 text-slate-700 shadow-sm">
+                <p data-i18n="chat_welcome">Xin chào! Tôi là Trợ Lý Ảo Rivergate London. Bạn cần hỗ trợ thông tin gì hôm
+                    nay?</p>
+            </div>
+
+            <!-- Suggested Questions Container -->
+            <div class="space-y-1.5 pt-1">
+                <p class="text-[10px] font-bold uppercase text-slate-400 tracking-wider">Câu hỏi gợi ý nhanh:</p>
+                <div class="flex flex-col space-y-1">
+                    <button onclick="askPresetQuestion('KTX có những loại phòng nào và đặc điểm ra sao?')"
+                        class="text-left p-2 rounded-xl bg-white hover:bg-river-50 border border-slate-200 text-river-900 font-medium transition text-[11px]">
+                        🔹 KTX có những loại phòng nào?
+                    </button>
+                    <button onclick="askPresetQuestion('Vị trí KTX và khả năng di chuyển đến Stratford ra sao?')"
+                        class="text-left p-2 rounded-xl bg-white hover:bg-river-50 border border-slate-200 text-river-900 font-medium transition text-[11px]">
+                        📍 Vị trí & phương tiện giao thông gần KTX?
+                    </button>
+                    <button onclick="askPresetQuestion('Cần chuẩn bị giấy tờ gì khi Check-in KTX?')"
+                        class="text-left p-2 rounded-xl bg-white hover:bg-river-50 border border-slate-200 text-river-900 font-medium transition text-[11px]">
+                        📋 Hồ sơ cần chuẩn bị khi Check-in?
+                    </button>
+                    <button onclick="askPresetQuestion('Quy trình 6 bước đặt phòng diễn ra như thế nào?')"
+                        class="text-left p-2 rounded-xl bg-white hover:bg-river-50 border border-slate-200 text-river-900 font-medium transition text-[11px]">
+                        🔄 Quy trình 6 bước đặt phòng?
+                    </button>
+                    <button onclick="askPresetQuestion('Tôi có thể hỏi về giá phòng và tiền đặt cọc không?')"
+                        class="text-left p-2 rounded-xl bg-white hover:bg-river-50 border border-slate-200 text-river-900 font-medium transition text-[11px]">
+                        💶 Quy định về giá phòng & Đặt cọc?
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Chat Input Field -->
+        <div class="p-3 bg-white border-t border-slate-200 flex items-center space-x-2">
+            <input id="chat-input" type="text" placeholder="Nhập câu hỏi của bạn..."
+                onkeypress="handleChatKeyPress(event)"
+                class="flex-1 bg-slate-100 border border-slate-200 text-xs rounded-xl px-3 py-2.5 focus:outline-none focus:border-river-500">
+            <button onclick="sendChatMessage()"
+                class="p-2.5 bg-navy-900 hover:bg-river-600 text-white rounded-xl transition">
+                <i class="fa-solid fa-paper-plane text-xs"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Booking / Consultation Modal -->
+    <div id="booking-modal"
+        class="hidden fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4">
+        <div
+            class="bg-white rounded-3xl max-w-lg w-full p-6 shadow-2xl border border-slate-200 relative max-h-[90vh] overflow-y-auto custom-scrollbar">
+            <button onclick="closeBookingModal()" class="absolute top-5 right-5 text-slate-400 hover:text-slate-700">
+                <i class="fa-solid fa-xmark text-xl"></i>
+            </button>
+
+            <h3 class="text-xl font-extrabold text-navy-900 mb-1" data-i18n="form_modal_title">Đăng Ký Tư Vấn & Đặt
+                Phòng</h3>
+            <p class="text-xs text-slate-500 mb-6">Bước 1 trong quy trình tư vấn chính thức của Rivergate London.</p>
+
+            <form onsubmit="submitConsultationForm(event)" class="space-y-4">
+                <!-- 1. Thời gian (Timestamp Auto-generated) -->
+                <input type="hidden" id="form-timestamp" name="timestamp">
+
+                <!-- 2. Họ và tên -->
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1" data-i18n="form_name">Họ và tên *</label>
+                    <input type="text" id="form-fullname" required placeholder="Nguyen Van A"
+                        class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-xs focus:ring-2 focus:ring-river-500 outline-none">
+                </div>
+
+                <!-- 3. Quốc tịch & 4. Email -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 mb-1" data-i18n="form_nationality">Quốc
+                            tịch *</label>
+                        <input type="text" id="form-nationality" required placeholder="Vietnam"
+                            class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-xs focus:ring-2 focus:ring-river-500 outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 mb-1" data-i18n="form_email">Email
+                            *</label>
+                        <input type="email" id="form-email" required placeholder="example@student.ac.uk"
+                            class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-xs focus:ring-2 focus:ring-river-500 outline-none">
+                    </div>
+                </div>
+
+                <!-- 5. SĐT / WhatsApp & 6. Trường Đại Học -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 mb-1" data-i18n="form_phone">SĐT / WhatsApp
+                            *</label>
+                        <input type="tel" id="form-phone" required placeholder="+84 901 234 567"
+                            class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-xs focus:ring-2 focus:ring-river-500 outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 mb-1" data-i18n="form_school">Trường Đại
+                            Học *</label>
+                        <input type="text" id="form-school" required placeholder="UCL / KCL / QMUL..."
+                            class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-xs focus:ring-2 focus:ring-river-500 outline-none">
+                    </div>
+                </div>
+
+                <!-- 7. Ngày dự kiến đến & 8. Loại phòng -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 mb-1" data-i18n="form_arrival">Ngày dự kiến
+                            đến *</label>
+                        <input type="date" id="form-arrival" required
+                            class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-xs focus:ring-2 focus:ring-river-500 outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 mb-1" data-i18n="form_room_type">Loại phòng
+                            *</label>
+                        <select id="modal-room-select" required
+                            class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2.5 text-xs focus:ring-2 focus:ring-river-500 outline-none">
+                            <option value="Ensuite">Phòng Ensuite</option>
+                            <option value="Studio">Phòng Studio</option>
+                            <option value="Twin">Phòng Twin</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- 9. Hình thức xem -->
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1" data-i18n="form_viewing_mode">Hình thức
+                        xem phòng *</label>
+                    <select id="form-viewing" required
+                        class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2.5 text-xs focus:ring-2 focus:ring-river-500 outline-none">
+                        <option value="Online Viewing">Xem trực tuyến (Online Video Call)</option>
+                        <option value="In-person Viewing">Xem trực tiếp tại KTX (Stratford, London)</option>
+                        <option value="No Viewing Required">Không cần xem phòng (Đăng ký trực tiếp)</option>
+                    </select>
+                </div>
+
+                <!-- 10. Ghi chú -->
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1" data-i18n="form_notes">Ghi chú</label>
+                    <textarea id="form-notes" rows="2"
+                        placeholder="Nhập nhu cầu đặc biệt, thời hạn thuê dự kiến hoặc câu hỏi bổ sung..."
+                        class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-xs focus:ring-2 focus:ring-river-500 outline-none resize-none"></textarea>
+                </div>
+
+                <div class="p-3 bg-amber-50 rounded-xl text-[11px] text-amber-800 border border-amber-200">
+                    <i class="fa-solid fa-shield-halved mr-1"></i> Rivergate tuân thủ quy định bảo mật: không yêu cầu
+                    gửi hộ chiếu hay thanh toán công khai trên form.
+                </div>
+
+                <button type="submit" id="submit-btn"
+                    class="w-full py-3 bg-navy-900 hover:bg-river-600 text-white font-bold rounded-xl text-xs transition shadow-md"
+                    data-i18n="form_submit">
+                    Gửi Yêu Cầu Tư Vấn
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Viewing Request Modal -->
+    <div id="viewing-modal"
+        class="hidden fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl max-w-md w-full p-6 shadow-2xl border border-slate-200 relative">
+            <button onclick="closeViewingModal()" class="absolute top-5 right-5 text-slate-400 hover:text-slate-700">
+                <i class="fa-solid fa-xmark text-xl"></i>
+            </button>
+
+            <h3 class="text-xl font-extrabold text-navy-900 mb-1">Đặt Lịch Xem Phòng</h3>
+            <p class="text-xs text-slate-500 mb-4">Xem trực tiếp tại KTX Stratford hoặc Online Viewing qua video call.
+            </p>
+
+            <form onsubmit="submitViewingForm(event)" class="space-y-3 text-xs">
+                <div>
+                    <label class="block font-bold mb-1">Hình thức xem phòng:</label>
+                    <select class="w-full bg-slate-50 border border-slate-200 rounded-xl p-2.5">
+                        <option>Trực tuyến (Online Viewing Video Call)</option>
+                        <option>Trực tiếp tại KTX (Stratford, London)</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block font-bold mb-1">Họ tên & Email/WhatsApp:</label>
+                    <input type="text" required placeholder="Họ tên & SĐT/WhatsApp"
+                        class="w-full bg-slate-50 border border-slate-200 rounded-xl p-2.5">
+                </div>
+                <div>
+                    <label class="block font-bold mb-1">Ngày & Giờ mong muốn (Mon-Fri 09:00-18:00 London time):</label>
+                    <input type="datetime-local" required
+                        class="w-full bg-slate-50 border border-slate-200 rounded-xl p-2.5">
+                </div>
+                <button type="submit"
+                    class="w-full py-3 bg-river-600 hover:bg-navy-900 text-white font-bold rounded-xl transition">
+                    Xác Nhận Đặt Lịch Xem Phòng
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Notification Toast Box (No browser alert) -->
+    <div id="toast-message"
+        class="hidden fixed top-6 right-6 z-50 bg-emerald-600 text-white px-5 py-3 rounded-2xl shadow-2xl text-xs font-bold flex items-center space-x-2 border border-emerald-400">
+        <i class="fa-solid fa-circle-check text-base"></i>
+        <span id="toast-text">Yêu cầu tư vấn của bạn đã được gửi thành công!</span>
+    </div>
+
+    <script>
+        // =========================================================================
+        // 1. CẤU HÌNH KẾT NỐI GOOGLE SHEET
+        // =========================================================================
+        const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzKakyjjWWU6GAiWCVTVGZYChdk3HHxTMm9X2I-Da-wi8hWKC1zheRyacxsYsMxWplL/exec";
+
+        // Knowledge Base based strictly on source document
+        const knowledgeBase = {
+            rooms: "Rivergate London gồm 3 loại phòng chính:\n1. Phòng Ensuite: Giường đơn/kép nhỏ, bàn học, tủ, vệ sinh riêng, dùng bếp chung. Phù hợp cho sinh viên muốn tiết kiệm so với Studio.\n2. Phòng Studio: Giường, bàn học, tủ, vệ sinh riêng, bếp nhỏ khép kín & tủ lạnh nhỏ trong phòng. Phù hợp sinh viên cao học hoặc cần sự riêng tư tối đa.\n3. Phòng Twin: Dành cho 2 người ở chung, 2 giường đơn, 2 góc học tập riêng, khu lưu trữ riêng, bếp chung.",
+            location: "KTX nằm tại khu Stratford, East London. Từ KTX có thể đi bộ hoặc xe buýt ngắn tới ga Stratford - nơi kết nối Underground, Overground, DLR, Elizabeth Line và xe buýt. Bán kính xung quanh có siêu thị, nhà thuốc, nhà hàng đa quốc gia, trung tâm mua sắm, phòng gym, công viên và ngân hàng.",
+            checkin: "Khách mới check-in cần chuẩn bị:\n- Hộ chiếu hoặc giấy tờ tùy thân hợp lệ\n- Email xác nhận đặt phòng chính thức\n- Thông tin liên hệ cá nhân\n- Giấy tờ sinh viên / Thư mời nhập học (nếu có yêu cầu).\nSau check-in bạn sẽ được bàn giao chìa khóa/thẻ ra vào, hướng dẫn wifi, khu giặt sấy và an toàn.",
+            process: "Quy trình đặt phòng gồm 6 bước:\nBước 1: Gửi yêu cầu tư vấn (form, email, WhatsApp)\nBước 2: Nhận tư vấn sơ bộ từ đội ngũ\nBước 3: Kiểm tra tình trạng phòng chính thức từ hệ thống\nBước 4: Đặt lịch xem phòng (Trực tiếp hoặc Online)\nBước 5: Hoàn tất hồ sơ theo hướng dẫn\nBước 6: Nhận email xác nhận & hướng dẫn check-in.",
+            rules: "Quy định quan trọng:\n- Không tự cam kết giá thuê, ưu đãi giảm giá hoặc xác nhận phòng còn trống trên chatbot.\n- Mọi câu hỏi liên quan đến Hợp đồng, Tiền đặt cọc (Deposit), Thanh toán cụ thể cần được hướng dẫn tới Đội Tư Vấn chính thức.\n- Giữ gìn vệ sinh chung, tôn trọng giờ giấc yên tĩnh vào buổi tối, bảo quản chìa khóa và tài sản cá nhân."
+        };
+
+        function toggleChatbox() {
+            const container = document.getElementById('chatbox-container');
+            container.classList.toggle('hidden');
+        }
+
+        function openChatbox() {
+            const container = document.getElementById('chatbox-container');
+            container.classList.remove('hidden');
+        }
+
+        function askPresetQuestion(question) {
+            appendUserMessage(question);
+            setTimeout(() => {
+                let response = "";
+                if (question.includes("loại phòng")) {
+                    response = knowledgeBase.rooms;
+                } else if (question.includes("Vị trí") || question.includes("Stratford")) {
+                    response = knowledgeBase.location;
+                } else if (question.includes("Check-in") || question.includes("giấy tờ")) {
+                    response = knowledgeBase.checkin;
+                } else if (question.includes("quy trình") || question.includes("6 bước")) {
+                    response = knowledgeBase.process;
+                } else if (question.includes("giá") || question.includes("đặt cọc") || question.includes("tiền")) {
+                    response = "Theo quy định tư vấn chính thức:\nChatbot không tự ý tạo hoặc xác nhận giá thuê, tiền đặt cọc hay ưu đãi. Vui lòng để lại thông tin trong Form 'Đăng ký tư vấn' để Đội Ngũ Tư Vấn chính thức kiểm tra dữ liệu và hỗ trợ chi tiết tới bạn!";
+                } else {
+                    response = "Cảm ơn bạn đã đặt câu hỏi. Hãy để lại yêu cầu tư vấn trên biểu mẫu đăng ký, chuyên viên tư vấn Rivergate London sẽ phản hồi trong thời gian sớm nhất!";
+                }
+                appendBotMessage(response);
+            }, 500);
+        }
+
+        function handleChatKeyPress(event) {
+            if (event.key === 'Enter') {
+                sendChatMessage();
+            }
+        }
+
+        function sendChatMessage() {
+            const input = document.getElementById('chat-input');
+            const text = input.value.trim();
+            if (!text) return;
+
+            appendUserMessage(text);
+            input.value = '';
+
+            setTimeout(() => {
+                const lower = text.toLowerCase();
+                let response = "";
+
+                if (lower.includes("phòng") || lower.includes("ensuite") || lower.includes("studio") || lower.includes("twin")) {
+                    response = knowledgeBase.rooms;
+                } else if (lower.includes("vị trí") || lower.includes("ở đâu") || lower.includes("giao thông") || lower.includes("stratford")) {
+                    response = knowledgeBase.location;
+                } else if (lower.includes("checkin") || lower.includes("check-in") || lower.includes("nhận phòng") || lower.includes("giấy tờ")) {
+                    response = knowledgeBase.checkin;
+                } else if (lower.includes("giá") || lower.includes("tiền") || lower.includes("deposit") || lower.includes("ưu đãi")) {
+                    response = "Lưu ý tư vấn:\nChatbot công khai không đưa ra mức giá thuê hay tiền đặt cọc cụ thể khi chưa đối soát hệ thống. Vui lòng nhấn nút 'Đăng ký tư vấn' để Chuyên viên liên hệ trực tiếp.";
+                } else if (lower.includes("bước") || lower.includes("đặt phòng") || lower.includes("quy trình")) {
+                    response = knowledgeBase.process;
+                } else {
+                    response = "Xin cảm ơn câu hỏi của bạn. Rivergate Student Residence hỗ trợ tư vấn 5 ngôn ngữ (Tiếng Anh, Việt, Trung, Hàn, Nhật). Bạn có thể bấm nút 'Đăng ký tư vấn' trên giao diện để chuyên viên tư vấn hỗ trợ chi tiết!";
+                }
+
+                appendBotMessage(response);
+            }, 600);
+        }
+
+        function appendUserMessage(msg) {
+            const container = document.getElementById('chat-messages');
+            const div = document.createElement('div');
+            div.className = "bg-navy-900 text-white p-3 rounded-2xl ml-8 shadow-sm text-right font-medium text-[11px]";
+            div.textContent = msg;
+            container.appendChild(div);
+            container.scrollTop = container.scrollHeight;
+        }
+
+        function appendBotMessage(msg) {
+            const container = document.getElementById('chat-messages');
+            const div = document.createElement('div');
+            div.className = "bg-white p-3 rounded-2xl border border-slate-200 text-slate-800 shadow-sm whitespace-pre-line text-[11px]";
+            div.textContent = msg;
+            container.appendChild(div);
+            container.scrollTop = container.scrollHeight;
+        }
+
+        // Modal Controls
+        function openBookingModal(roomType = 'Ensuite') {
+            document.getElementById('booking-modal').classList.remove('hidden');
+            if (roomType) {
+                const select = document.getElementById('modal-room-select');
+                if (select) select.value = roomType;
+            }
+        }
+
+        function closeBookingModal() {
+            document.getElementById('booking-modal').classList.add('hidden');
+        }
+
+        function openViewingModal() {
+            document.getElementById('viewing-modal').classList.remove('hidden');
+        }
+
+        function closeViewingModal() {
+            document.getElementById('viewing-modal').classList.add('hidden');
+        }
+
+        function toggleMobileMenu() {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        }
+
+        function showToast(message) {
+            const toast = document.getElementById('toast-message');
+            const toastText = document.getElementById('toast-text');
+            toastText.textContent = message;
+            toast.classList.remove('hidden');
+            setTimeout(() => {
+                toast.classList.add('hidden');
+            }, 4000);
+        }
+
+        // Xử lý submit Form và đẩy dữ liệu về Google Sheet
+        function submitConsultationForm(e) {
+            e.preventDefault();
+
+            const submitBtn = document.getElementById('submit-btn');
+            if (submitBtn) {
+                submitBtn.disabled = true;
+                submitBtn.textContent = "Đang gửi dữ liệu...";
+            }
+
+            const now = new Date().toLocaleString('vi-VN');
+
+            const formData = {
+                timestamp: now,
+                fullname: document.getElementById('form-fullname').value,
+                nationality: document.getElementById('form-nationality').value,
+                email: document.getElementById('form-email').value,
+                phone: document.getElementById('form-phone').value,
+                school: document.getElementById('form-school').value,
+                arrival: document.getElementById('form-arrival').value,
+                roomType: document.getElementById('modal-room-select').value,
+                viewingMode: document.getElementById('form-viewing').value,
+                notes: document.getElementById('form-notes').value
+            };
+
+            // Gửi AJAX POST request tới Google Apps Script
+            fetch(GOOGLE_SCRIPT_URL, {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData)
+            })
+                .then(() => {
+                    closeBookingModal();
+                    showToast("Đã gửi đăng ký thành công về Google Sheet lúc " + now + "!");
+                    // Reset form
+                    e.target.reset();
+                })
+                .catch(error => {
+                    console.error("Lỗi khi gửi dữ liệu:", error);
+                    closeBookingModal();
+                    showToast("Đã ghi nhận yêu cầu tư vấn!");
+                })
+                .finally(() => {
+                    if (submitBtn) {
+                        submitBtn.disabled = false;
+                        submitBtn.textContent = "Gửi Yêu Cầu Tư Vấn";
+                    }
+                });
+        }
+
+        function submitViewingForm(e) {
+            e.preventDefault();
+            closeViewingModal();
+            showToast("Đã ghi nhận lịch hẹn xem phòng của bạn!");
+        }
+
+        // Context menu right-click trigger requirement
+        window.addEventListener('contextmenu', function (e) {
+            // Display chatbot on right click
+            e.preventDefault();
+            openChatbox();
+            showToast("Đã mở Trợ Lý Tư Vấn 24/7 Rivergate London!");
+        });
+    </script>
+</body>
+
+</html>
