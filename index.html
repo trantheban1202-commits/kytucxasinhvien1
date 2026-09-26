@@ -1572,6 +1572,70 @@
     </div>
   </div>
 </section>
+    <script>
+async function loadBlogPosts() {
+  const blogList = document.getElementById('blog-list');
+  if (!blogList) return;
+
+  try {
+    const response = await fetch('https://api.github.com/repos/hongdiamond/ktxsv1/contents/blog?ref=main');
+    const files = await response.json();
+    const posts = files.filter(file => file.type === 'file' && file.name.endsWith('.html'));
+    blogList.innerHTML = '';
+
+    posts.forEach(file => {
+      const title = file.name
+        .replace(/\.html$/i, '')
+        .replace(/-\d{8}-\d{6}$/, '')
+        .replace(/-/g, ' ');
+
+      blogList.insertAdjacentHTML('beforeend', `
+        <article class="bg-slate-50 border border-slate-200 rounded-2xl p-6">
+          <h3 class="text-xl font-bold text-slate-900 mb-3">${title}</h3>
+          <p class="text-sm text-slate-600 mb-4">Bài viết mới dành cho sinh viên.</p>
+          <a href="blog/${file.name}" class="font-semibold text-teal-600">Xem bài viết →</a>
+        </article>
+      `);
+    });
+  } catch (error) {
+    console.error('Không tải được danh sách bài viết:', error);
+  }
+}
+
+document.addEventListener('DOMContentLoaded', loadBlogPosts);
+<script>
+async function loadBlogPosts() {
+  const blogList = document.getElementById('blog-list');
+  if (!blogList) return;
+
+  try {
+    const response = await fetch('https://api.github.com/repos/hongdiamond/ktxsv1/contents/blog?ref=main');
+    const files = await response.json();
+    const posts = files.filter(file => file.type === 'file' && file.name.endsWith('.html'));
+    blogList.innerHTML = '';
+
+    posts.forEach(file => {
+      const title = file.name
+        .replace(/\.html$/i, '')
+        .replace(/-\d{8}-\d{6}$/, '')
+        .replace(/-/g, ' ');
+
+      blogList.insertAdjacentHTML('beforeend', `
+        <article class="bg-slate-50 border border-slate-200 rounded-2xl p-6">
+          <h3 class="text-xl font-bold text-slate-900 mb-3">${title}</h3>
+          <p class="text-sm text-slate-600 mb-4">Bài viết mới dành cho sinh viên.</p>
+          <a href="blog/${file.name}" class="font-semibold text-teal-600">Xem bài viết →</a>
+        </article>
+      `);
+    });
+  } catch (error) {
+    console.error('Không tải được danh sách bài viết:', error);
+  }
+}
+
+document.addEventListener('DOMContentLoaded', loadBlogPosts);
+</script>
+
 </body>
-ƒ
+
 </html>
